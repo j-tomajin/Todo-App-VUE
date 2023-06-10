@@ -20,6 +20,10 @@
             :showCompleted="showCompleted"
             :task="task" />
     </div>
+
+    <div class="line">
+        <span>Nothing Follows</span>
+    </div>
 </template>
 
 <script>
@@ -47,5 +51,27 @@
 
     .complete-task, .all-task {
         display: block;
+    }
+
+    .line {
+        width: 100%;
+        background-color: white;
+        height: 2px;
+        margin-block: 24px;
+        text-align: center;
+        border-radius: 50px;
+
+        position: relative;
+
+        span {
+            background-color: #181818;
+            padding-inline: 16px;
+
+            position: absolute;
+            left: 50%;
+            top: -12px;
+
+            transform: translateX(-50%);
+        }
     }
 </style>
