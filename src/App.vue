@@ -42,6 +42,8 @@
         this.tasks = this.tasks.filter((task) => !task.complete)
 
         this.items = this.tasks.filter((task) => !task.complete).length
+        
+        this.completedTask =  this.completedTask.filter((task) => !task.complete)
       },
 
       // FOOTER FUNCTIONS
@@ -52,14 +54,11 @@
       },
       
       showActiveTask() {
-        console.log('show active task')
         this.allTask = false
         this.showActive = true
         this.showCompleted = false
-        console.log(this.showActive)
 
         this.activeTask = this.tasks.filter((task) => !task.complete)
-        console.log(this.activeTask)
       },
       
       showCompletedTask() {
@@ -132,6 +131,10 @@
     @show-all="showAllTask"
     @show-active="showActiveTask"
     @show-completed="showCompletedTask"
+
+    :allTask="allTask"
+    :showActive="showActive"
+    :showCompleted="showCompleted"
   />
 </template>
 
