@@ -122,8 +122,6 @@
     :showCompleted="showCompleted"
   />
 
-  <!-- <p>{{ this.tasks.length }} item/s left</p> -->
-
   <Footer 
     :items="items"
     @clear-completed="clearCompleted" 
