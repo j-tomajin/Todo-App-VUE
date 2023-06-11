@@ -1,4 +1,5 @@
 <template>
+    <!-- All Tasks -->
      <div 
         :class="[allTask ? 'all-task' : 'hide', 'task']"
         v-for="task in tasks"
@@ -6,10 +7,26 @@
     >
         <Task 
             @toggle-complete="$emit('toggle-complete', task.id)"
+            @delete-task="$emit('delete-task', task.id)"
             :allTask="allTask"
             :task="task" /> 
     </div>
     
+    <!-- Active Tasks -->
+    <div 
+        :class="[showActive ? 'active-task' : 'hide', 'task']"
+        v-for="task in activeTask"
+        :key="task.id"
+    >
+        <Task 
+            @toggle-complete="$emit('toggle-complete', task.id)"
+            @delete-task="$emit('delete-task', task.id)"
+            :showActive="showActive"
+            :task="task" />
+        <!-- <p>sadfsdf</p> -->
+    </div>
+
+    <!-- Complete Tasks -->
     <div 
         :class="[showCompleted ? 'complete-task' : 'hide', 'task']"
         v-for="task in completedTask"
@@ -17,6 +34,7 @@
     >
         <Task 
             @toggle-complete="$emit('toggle-complete', task.id)"
+            @delete-task="$emit('delete-task', task.id)"
             :showCompleted="showCompleted"
             :task="task" />
     </div>
@@ -33,14 +51,16 @@
         name: 'Tasks',
         props: {
             tasks: Array,
+            activeTask: Array,
             completedTask: Array,
             allTask: Boolean,
+            showActive: Boolean,
             showCompleted: Boolean,
         },
         components: {
             Task,
         },
-        emits: ['toggle-complete']
+        emits: ['toggle-complete', 'delete-task']
     }
 </script>
 
@@ -49,7 +69,7 @@
         display: none;
     }
 
-    .complete-task, .all-task {
+    .complete-task, .all-task, .active-task {
         display: block;
     }
 
