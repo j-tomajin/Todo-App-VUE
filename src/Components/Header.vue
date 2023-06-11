@@ -1,6 +1,6 @@
 <template>
     <header class="header">
-        <h1 class="text-head">TODO</h1>
+        <h1 class="text-head">{{ text }}</h1>
         <Button text="" bg_color="black" />
     </header>
 </template>
@@ -12,6 +12,12 @@
         name: 'Header',
         components: {
             Button,
+        },
+        props: {
+            text: {
+                type: String,
+                default: 'This is header'
+            }
         }
     }
 </script>
