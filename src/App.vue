@@ -81,18 +81,7 @@
         }
     },
     created() {
-        this.tasks = [
-          // {
-          //   id: 1,
-          //   text: 'Test',
-          //   complete: false,
-          // },
-          // {
-          //   id: 2,
-          //   text: 'Test 2',
-          //   complete: true,
-          // },
-        ]
+        this.tasks = []
 
         this.items = this.tasks.length
 
