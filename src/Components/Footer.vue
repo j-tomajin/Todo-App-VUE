@@ -8,20 +8,25 @@
         <Button
             @click="$emit('show-all')"
             text="All"
-            bg_color="transparent" />
+            bg_color="transparent"
+            :class="[allTask ? 'active' : '']" 
+        />
 
         <!-- Show Active -->
         <Button
             @click="$emit('show-active')"
             text="Active"
             bg_color="transparent"
+            :class="[showActive ? 'active' : '']"
         /> 
         
         <!-- Show Completed -->
         <Button 
             @click="$emit('show-completed')"
             text="Completed" 
-            bg_color="transparent" /> 
+            bg_color="transparent" 
+            :class="[showCompleted ? 'active' : '']"    
+        /> 
     </div>
 
     <!-- Clear completed -->
@@ -42,6 +47,9 @@
         },
         props: {
             items: Number,
+            allTask: Boolean,
+            showActive: Boolean,
+            showCompleted: Boolean,
         },
         emits: ['show-completed', 'show-all', 'show-active', 'clear-completed']
     }
@@ -57,5 +65,10 @@
         display: flex;
         align-items: center;
         gap: 8px;
+    }
+
+    .active {
+        color: rgb(0, 162, 255);
+        font-weight: bold;
     }
 </style>
