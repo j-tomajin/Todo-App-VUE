@@ -92,7 +92,9 @@
 </script>
 
 <template>
-  <Header />
+  <Header 
+    text="TODO"
+  />
 
   <AddTask
     @new-task="addNewTask"
