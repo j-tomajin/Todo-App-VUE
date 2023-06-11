@@ -18,6 +18,8 @@
 
         this.completedTask = this.completedTask.map((task) => task.id === id ? { ...task, complete: !task.complete } : task)
 
+        this.activeTask = this.activeTask.map((task) => task.id === id ? { ...task, complete: !task.complete } : task)
+
         this.items = this.tasks.filter((task) => !task.complete).length
         this.tasks.sort((a, b) => a.complete - b.complete)
       },
@@ -25,23 +27,45 @@
       addNewTask(task) {
         this.tasks = [...this.tasks, task]
 
-        this.items++
+        this.items = this.tasks.filter((task) => !task.complete).length
+      },
+
+      deleteTask(id) {
+          this.tasks = this.tasks.filter((task) => task.id !== id)
+          this.completedTask = this.completedTask.filter((task) => task.id !== id)
+          this.activeTask = this.activeTask.filter((task) => task.id !== id)
+
+          this.items = this.tasks.filter((task) => !task.complete).length
       },
 
       clearCompleted() {
         this.tasks = this.tasks.filter((task) => !task.complete)
 
-        this.items = this.tasks.length
+        this.items = this.tasks.filter((task) => !task.complete).length
       },
 
+      // FOOTER FUNCTIONS
       showAllTask() {
-        this.allTask = !this.allTask
-        this.showCompleted = !this.showCompleted
+        this.allTask = true
+        this.showActive = false
+        this.showCompleted = false
       },
+      
+      showActiveTask() {
+        console.log('show active task')
+        this.allTask = false
+        this.showActive = true
+        this.showCompleted = false
+        console.log(this.showActive)
 
+        this.activeTask = this.tasks.filter((task) => !task.complete)
+        console.log(this.activeTask)
+      },
+      
       showCompletedTask() {
-        this.showCompleted = !this.showCompleted
-        this.allTask = !this.allTask
+        this.allTask = false
+        this.showActive = false
+        this.showCompleted = true
 
         this.completedTask =  this.tasks.filter((task) => task.complete)
       },
@@ -51,15 +75,29 @@
             tasks: [],
             items: 0,
             allTask: true,
+            showActive: false,
             showCompleted: false,
+            activeTask: [],
             completedTask: [],
         }
     },
     created() {
-        this.tasks = []
+        this.tasks = [
+          // {
+          //   id: 1,
+          //   text: 'Test',
+          //   complete: false,
+          // },
+          // {
+          //   id: 2,
+          //   text: 'Test 2',
+          //   complete: true,
+          // },
+        ]
 
         this.items = this.tasks.length
 
+        this.activeTask = []
         this.completedTask = []
     }
   }
@@ -76,8 +114,12 @@
     @toggle-complete="toggleComplete"
     :tasks="tasks" 
     :completedTask="completedTask"
+    :activeTask="activeTask"
+
+    @delete-task="deleteTask"
 
     :allTask="allTask"
+    :showActive="showActive"
     :showCompleted="showCompleted"
   />
 
@@ -88,6 +130,7 @@
     @clear-completed="clearCompleted" 
     
     @show-all="showAllTask"
+    @show-active="showActiveTask"
     @show-completed="showCompletedTask"
   />
 </template>
