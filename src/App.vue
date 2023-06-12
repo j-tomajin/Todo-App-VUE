@@ -1,4 +1,6 @@
 <script>
+  import { ref } from 'vue';
+
   import Header from './Components/Header.vue';
   import Tasks from './Components/Tasks.vue';
   import AddTask from './Components/AddTask.vue';
@@ -19,31 +21,37 @@
         this.completedTask = this.completedTask.map((task) => task.id === id ? { ...task, complete: !task.complete } : task)
 
         this.activeTask = this.activeTask.map((task) => task.id === id ? { ...task, complete: !task.complete } : task)
-
-        this.items = this.tasks.filter((task) => !task.complete).length
+        
         this.tasks.sort((a, b) => a.complete - b.complete)
+        this.items = this.tasks.filter((task) => !task.complete).length
+        
+        this.saveToLocalStorage()
       },
-
+      
       addNewTask(task) {
         this.tasks = [...this.tasks, task]
-
+        
         this.items = this.tasks.filter((task) => !task.complete).length
       },
-
+      
       deleteTask(id) {
-          this.tasks = this.tasks.filter((task) => task.id !== id)
-          this.completedTask = this.completedTask.filter((task) => task.id !== id)
-          this.activeTask = this.activeTask.filter((task) => task.id !== id)
+        this.tasks = this.tasks.filter((task) => task.id !== id)
+        this.completedTask = this.completedTask.filter((task) => task.id !== id)
+        this.activeTask = this.activeTask.filter((task) => task.id !== id)
+        
+        this.items = this.tasks.filter((task) => !task.complete).length
 
-          this.items = this.tasks.filter((task) => !task.complete).length
+        this.saveToLocalStorage()
       },
-
+      
       clearCompleted() {
         this.tasks = this.tasks.filter((task) => !task.complete)
-
+        
         this.items = this.tasks.filter((task) => !task.complete).length
         
         this.completedTask =  this.completedTask.filter((task) => !task.complete)
+
+        this.saveToLocalStorage()
       },
 
       // FOOTER FUNCTIONS
@@ -68,6 +76,11 @@
 
         this.completedTask =  this.tasks.filter((task) => task.complete)
       },
+
+      saveToLocalStorage() {
+        localStorage.setItem('tasks', JSON.stringify(this.tasks))
+        localStorage.setItem('items', this.items)
+      },
     },
     data() {
         return {
@@ -78,6 +91,8 @@
             showCompleted: false,
             activeTask: [],
             completedTask: [],
+
+            currentTheme: 'dark',
         }
     },
     created() {
@@ -87,6 +102,14 @@
 
         this.activeTask = []
         this.completedTask = []
+
+        const prevAllTask = JSON.parse(localStorage.getItem('tasks'))
+        const prevItemCount = JSON.parse(localStorage.items || 0)
+
+        if(prevAllTask) {
+          this.tasks = prevAllTask
+          this.items = prevItemCount
+        }
     }
   }
 </script>
@@ -98,6 +121,7 @@
 
   <AddTask
     @new-task="addNewTask"
+    @save-to-local-storage="saveToLocalStorage"
   />
 
   <Tasks 
