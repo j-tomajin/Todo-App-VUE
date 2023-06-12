@@ -6,7 +6,7 @@
         :key="task.id"
     >
         <Task 
-            @toggle-complete="$emit('toggle-complete', task.id)"
+            @toggle-complete="toggleComplete(task.id)"
             @delete-task="$emit('delete-task', task.id)"
             :allTask="allTask"
             :task="task" /> 
@@ -19,7 +19,7 @@
         :key="task.id"
     >
         <Task 
-            @toggle-complete="$emit('toggle-complete', task.id)"
+            @toggle-complete="toggleComplete(task.id)"
             @delete-task="$emit('delete-task', task.id)"
             :showActive="showActive"
             :task="task" />
@@ -33,7 +33,7 @@
         :key="task.id"
     >
         <Task 
-            @toggle-complete="$emit('toggle-complete', task.id)"
+            @toggle-complete="toggleComplete(task.id)"
             @delete-task="$emit('delete-task', task.id)"
             :showCompleted="showCompleted"
             :task="task" />
@@ -59,6 +59,11 @@
         },
         components: {
             Task,
+        },
+        methods: {
+            toggleComplete(id) {
+                this.$emit('toggle-complete', id)
+            }
         },
         emits: ['toggle-complete', 'delete-task']
     }
