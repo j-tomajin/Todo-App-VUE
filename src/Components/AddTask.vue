@@ -1,5 +1,8 @@
 <template>
-    <form @submit="newTask" class="form">
+    <form 
+        @submit="newTask" 
+        class="form"
+    >
         <input 
             v-model="text"
             name="text"
@@ -42,6 +45,8 @@
 
                 this.text = ''
                 this.complete = false
+
+                this.$emit('save-to-local-storage')
             }
         }
     }
