@@ -2,7 +2,10 @@
     <button 
         @click="handleClick()"
         class="btn"
-        :style="{background: bg_color}">{{ text }}</button>
+        :style="{background: bg_color}"
+    >
+        {{ text }}
+    </button>
 </template>
 
 <script>
