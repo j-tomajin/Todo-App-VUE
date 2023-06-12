@@ -4,9 +4,9 @@
         <div :class="[task.complete ? 'complete' : '', 'task']">
             <Button 
                 class="btn" 
+                @btn-click="toggleComplete(task.id)"
                 text="" 
                 :bg_color="[task.complete ? 'black' : 'transparent']" 
-                @btn-click="$emit('toggle-complete', task.id)"
             />
             <h3>{{ task.text }}</h3>
 
@@ -24,7 +24,7 @@
         <div :class="[!task.complete ? '' : 'hide', 'task']">
             <Button 
                 class="btn" 
-                @btn-click="$emit('toggle-complete', task.id)"
+                @btn-click="toggleComplete(task.id)"
                 text="" 
                 :bg_color="[task.complete ? 'black' : 'transparent']" 
             />
@@ -44,7 +44,7 @@
         <div :class="[task.complete ? 'complete' : 'hide', 'task']">
             <Button 
                 class="btn" 
-                @btn-click="$emit('toggle-complete', task.id)"
+                @btn-click="toggleComplete(task.id)"
                 text="" 
                 :bg_color="[task.complete ? 'black' : 'transparent']" 
             />
@@ -73,6 +73,11 @@
         },
         components: {
             Button,
+        },
+        methods: {
+            toggleComplete(id) {
+                this.$emit('toggle-complete', id)
+            },
         },
         emits: ['toggle-complete', 'delete-task']
     }
