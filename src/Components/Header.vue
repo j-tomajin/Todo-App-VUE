@@ -1,17 +1,20 @@
 <template>
     <header class="header">
         <h1 class="text-head">{{ text }}</h1>
-        <Button text="" bg_color="black" />
+        <button text="" />
+        <!-- <ThemeContainer /> -->
     </header>
 </template>
 
 <script>
     import Button from './Button.vue';
+    // import ThemeContainer from './ThemeContainer.vue';
 
     export default {
         name: 'Header',
         components: {
             Button,
+            // ThemeContainer
         },
         props: {
             text: {
@@ -29,8 +32,8 @@
         justify-content: space-between;
     }
     .text-head {
-        color: white;
-        letter-spacing: 3px;
-        font-size: 3rem;
+        color: var(--clr-head);
+        letter-spacing: 5px;
+        font-size: 2rem;
     }
 </style>
