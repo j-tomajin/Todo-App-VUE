@@ -74,8 +74,19 @@
         display: none;
     }
 
+    .task {
+        padding: {
+            inline: 1rem;
+            top: 5px;
+        };
+        
+        border-bottom: 1px solid var(--clr-line);
+    }
+
     .complete-task, .all-task, .active-task {
         display: block;
+
+        
     }
 
     .line {
@@ -89,7 +100,8 @@
         position: relative;
 
         span {
-            background-color: #181818;
+            background-color: var(--clr-background-todo);
+            color: var(--clr-text-task);
             padding-inline: 16px;
 
             position: absolute;
