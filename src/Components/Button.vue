@@ -16,7 +16,7 @@
                 type: String,
                 default: 'This is a button'
             },
-            bg_color: 'green'
+            bg_color: 'green',
         },
         methods: {
             handleClick() {
@@ -32,5 +32,8 @@
         border: 0;
         border-radius: 4px;
         cursor: pointer;
+
+        font-family: inherit;
+        font-size: 1rem;
     }
 </style>
