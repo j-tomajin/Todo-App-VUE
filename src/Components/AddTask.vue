@@ -59,28 +59,32 @@
         justify-content: space-between;
         gap: 4px;
 
-        background-color: rgb(143, 143, 143);
-        padding: 40px 8px;
+        margin-block: 2rem 1.5rem;
         border-radius: 8px;
-
-        margin-bottom: 24px;
     }
 
     .new-task {
         width: 100%;
+        background-color: var(--clr-background-todo);
+        color: var(--clr-text-task);
+        border-top-left-radius: 8px;
+        padding: 16px 20px;
     }
-
+    
     .submit-btn {
-        background-color: hsl(120, 51%, 41%);
+        background-color: hsl(128, 100%, 51%);
         color: white;
+        font-family: inherit;
         font-weight: bold;
+        border-top-right-radius: 8px;
+        padding: 17px 20px;
+        
         cursor: pointer;
     }
-
+    
     .new-task, .submit-btn {
         outline: 0;
         border: none;
-        padding: 12px 16px;
-        border-radius: 4px;
+        font-size: inherit;
     }
 </style>
