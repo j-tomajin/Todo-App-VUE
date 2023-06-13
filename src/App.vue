@@ -1,5 +1,4 @@
 <script>
-  import { ref } from 'vue';
 
   import Header from './Components/Header.vue';
   import Tasks from './Components/Tasks.vue';
@@ -30,6 +29,8 @@
       
       addNewTask(task) {
         this.tasks = [...this.tasks, task]
+
+        this.tasks.sort((a, b) => a.complete - b.complete)
         
         this.items = this.tasks.filter((task) => !task.complete).length
       },
@@ -91,8 +92,6 @@
             showCompleted: false,
             activeTask: [],
             completedTask: [],
-
-            currentTheme: 'dark',
         }
     },
     created() {
@@ -115,41 +114,54 @@
 </script>
 
 <template>
-  <Header 
-    text="TODO"
-  />
-
-  <AddTask
-    @new-task="addNewTask"
-    @save-to-local-storage="saveToLocalStorage"
-  />
-
-  <Tasks 
-    @toggle-complete="toggleComplete"
-    :tasks="tasks" 
-    :completedTask="completedTask"
-    :activeTask="activeTask"
-
-    @delete-task="deleteTask"
-
-    :allTask="allTask"
-    :showActive="showActive"
-    :showCompleted="showCompleted"
-  />
-
-  <Footer 
-    :items="items"
-    @clear-completed="clearCompleted" 
+  <main class="main">
+    <Header 
+      text="TODO"
+    />
+  
+    <AddTask
+      @new-task="addNewTask"
+      @save-to-local-storage="saveToLocalStorage"
+    />
+  
+    <div class="todo-body">
+      <Tasks 
+        @toggle-complete="toggleComplete"
+        :tasks="tasks" 
+        :completedTask="completedTask"
+        :activeTask="activeTask"
     
-    @show-all="showAllTask"
-    @show-active="showActiveTask"
-    @show-completed="showCompletedTask"
-
-    :allTask="allTask"
-    :showActive="showActive"
-    :showCompleted="showCompleted"
-  />
+        @delete-task="deleteTask"
+    
+        :allTask="allTask"
+        :showActive="showActive"
+        :showCompleted="showCompleted"
+      />
+    
+      <Footer 
+        :items="items"
+        @clear-completed="clearCompleted" 
+        
+        @show-all="showAllTask"
+        @show-active="showActiveTask"
+        @show-completed="showCompletedTask"
+    
+        :allTask="allTask"
+        :showActive="showActive"
+        :showCompleted="showCompleted"
+      />
+    </div>
+  </main>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
+  .main {
+    padding-block: 2rem;
+  }
+  
+  .todo-body {
+    background-color: var(--clr-background-todo);
+    padding-top: 1px;
+    border-radius: 0 0 8px 8px;
+  }
 </style>
