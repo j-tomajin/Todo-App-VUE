@@ -8,14 +8,16 @@
                 text="" 
                 :bg_color="[task.complete ? 'black' : 'transparent']" 
             />
-            <h3>{{ task.text }}</h3>
 
-            <Button 
-                class="delete-task-btn" 
-                text="Delete"
-                bg_color="rgb(255, 65, 65)"
-                @btn-click="$emit('delete-task', task.id)"
-            />
+            <h3 @click="toggleComplete(task.id)">{{ task.text }}</h3>
+
+            <button 
+                type="button" 
+                class="delete-task-btn hide-btn" 
+                @click="$emit('delete-task', task.id)"
+            >
+                <img src="../assets/icons/icon-cross.svg" alt="cross/delete task">
+            </button>
         </div>
     </div>
 
@@ -28,14 +30,16 @@
                 text="" 
                 :bg_color="[task.complete ? 'black' : 'transparent']" 
             />
-            <h3>{{ task.text }}</h3>
 
-            <Button 
-                class="delete-task-btn" 
-                text="Delete"
-                bg_color="rgb(255, 65, 65)"
-                @btn-click="$emit('delete-task', task.id)"
-            />
+            <h3 @click="toggleComplete(task.id)">{{ task.text }}</h3>
+
+            <button 
+                type="button" 
+                class="delete-task-btn hide-btn" 
+                @click="$emit('delete-task', task.id)"
+            >
+                <img src="../assets/icons/icon-cross.svg" alt="cross/delete task">
+            </button>
         </div>
     </div>
 
@@ -48,19 +52,22 @@
                 text="" 
                 :bg_color="[task.complete ? 'black' : 'transparent']" 
             />
-            <h3>{{ task.text }}</h3>
 
-            <Button 
-                class="delete-task-btn" 
-                text="Delete"
-                bg_color="rgb(255, 65, 65)"
-                @btn-click="$emit('delete-task', task.id)"
-            />
+            <h3 @click="toggleComplete(task.id)">{{ task.text }}</h3>
+
+            <button 
+                type="button" 
+                class="delete-task-btn hide-btn" 
+                @click="$emit('delete-task', task.id)"
+            >
+                <img src="../assets/icons/icon-cross.svg" alt="cross/delete task">
+            </button>
         </div>
     </div>
 </template>
 
 <script>
+
     import Button from './Button.vue';
 
     export default {
@@ -90,10 +97,22 @@
         justify-content: start;
         gap: 24px;
         margin-bottom: 8px;
-    }
 
+        color: var(--clr-text-task);
+
+        h3 {
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        &:hover > .hide-btn {
+            display: block;
+        }
+    }
+    
     .complete {
-        color: rgb(112, 112, 112);
+        color: var(--clr-text-task-complete);
+        
         h3 {
             text-decoration: line-through;
         }
@@ -105,11 +124,18 @@
         border-radius: 50px;
     }
 
+    .hide-btn {
+        display: none;
+    }
+
     .delete-task-btn {
         margin-left: auto;
         border: none;
         border-radius: 8px;
-        color: white;
+        color: var(--clr-text);
+        border: none;
+        outline: 0;
+        background-color: transparent;
     }
 
     .show {
