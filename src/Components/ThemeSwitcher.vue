@@ -1,6 +1,9 @@
-<template>
+<!-- <template>
     <div>
-        <Button @btn-click="toggleTheme" />
+        <Button 
+            alt="Button to toggle theme"
+            @btn-click="$emit('theme-toggle')"
+        />
     </div>
 </template>
 
@@ -12,20 +15,11 @@
         components: {
             Button,
         },
-        methods: {
-            toggleTheme() {
-                this.$emit('toggle-theme')
-            }
-        },
+        props: {
+            currentTheme: String
+        }
     }
 </script>
 
 <style lang="scss">
-    .dark {
-        --clr-red: red;
-    }
-
-    p {
-        color: var(--clr-red);
-    }
-</style>
+</style> -->
