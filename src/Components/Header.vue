@@ -1,7 +1,7 @@
 <template>
     <header class="header">
         <h1 class="text-head">{{ text }}</h1>
-        <button text="" />
+        <Button text="" />
         <!-- <ThemeContainer /> -->
     </header>
 </template>
