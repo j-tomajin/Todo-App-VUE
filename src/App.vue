@@ -127,7 +127,7 @@
     <div class="todo-body">
       <Tasks 
         @toggle-complete="toggleComplete"
-        :tasks="tasks" 
+        :tasks="tasks"
         :completedTask="completedTask"
         :activeTask="activeTask"
     
